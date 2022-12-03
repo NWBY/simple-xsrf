@@ -3,7 +3,7 @@ from os import environ
 import string
 import random
 
-def get_key() -> str:
+def get_key() -> str | None:
     return environ.get('ENCRYPTION_KEY')
 
 def create_xsrf(key: str) -> str:
