@@ -23,3 +23,11 @@ from simple_xsrf.token import create_xsrf
 
 token = create_xsrf(key)
 ```
+
+Checking if a token is valid:
+```python
+from simple_xsrf.token import is_valid
+
+is_token_valid = is_valid(key, token_from_request, token_from_storage)
+```
+You should store your token in a storage layer such as Redis or DynamoDB to be retrived later.
