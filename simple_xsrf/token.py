@@ -1,11 +1,7 @@
 from cryptography.fernet import Fernet, InvalidToken
 from .exceptions import InvalidXsrfToken
-from os import environ
 import string
 import random
-
-def get_key() -> str | None:
-    return environ.get('ENCRYPTION_KEY')
 
 def create_xsrf(key: str) -> str:
     ft = Fernet(key)

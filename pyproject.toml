@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simple-xsrf"
-version = "0.2.0"
+version = "0.2.1"
 description = "Simple package to protect against CSRF/XSRF attacks"
 authors = ["Sam Newby <sam.newby19@gmail.com>"]
 readme = "README.md"
