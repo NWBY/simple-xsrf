@@ -1,4 +1,5 @@
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
+from .exceptions import InvalidXsrfToken
 from os import environ
 import string
 import random
@@ -16,14 +17,21 @@ def create_xsrf(key: str) -> str:
 
 def decrypt_token(key: str, token: str) -> str:
     ft = Fernet(key)
-    decrypted_token = ft.decrypt(token)
+
+    try:
+        decrypted_token = ft.decrypt(token)
+    except InvalidToken:
+        raise InvalidXsrfToken('Token is not valid')
 
     return decrypted_token.decode('utf-8')
 
 def is_valid(key: str, token: str, stored_token: str) -> bool:
     ft = Fernet(key)    
 
-    decrypted_token = ft.decrypt(token)
-    decrypted_stored_token = ft.decrypt(stored_token)
+    try:
+        decrypted_token = ft.decrypt(token)
+        decrypted_stored_token = ft.decrypt(stored_token)
+    except InvalidToken:
+        raise InvalidXsrfToken('Token is not valid')
 
     return decrypted_token == decrypted_stored_token

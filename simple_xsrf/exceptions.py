@@ -1,0 +1,2 @@
+class InvalidXsrfToken(Exception):
+    pass
